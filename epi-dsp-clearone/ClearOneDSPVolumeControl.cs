@@ -111,7 +111,7 @@ namespace ClearOneDSP
             if (String.IsNullOrEmpty(value))
                 _parent.enqueueCommand(new ClearOneDSPDevice.QueuedCommand { Command = command, Control = this });
             else
-                _parent.enqueueCommand(new ClearOneDSPDevice.QueuedCommand { Command = command + " " + _config.Group.ToChar(), Control = this });
+                _parent.enqueueCommand(new ClearOneDSPDevice.QueuedCommand { Command = command + " " + value, Control = this });
         }
 
         /// <summary>
@@ -166,6 +166,7 @@ namespace ClearOneDSP
 
             double volumeLevel = scale(level, 0, 65535, -65, 20);
 
+            Debug.Console(1, this, "volume, db: '{0}'", string.Format("{0:#0.00} A", volumeLevel));
             prepareCommand(_gainCmd, string.Format("{0:#0.00} A", volumeLevel)); 
         }
 
